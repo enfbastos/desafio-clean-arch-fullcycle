@@ -1,12 +1,11 @@
 import { Sequelize } from "sequelize-typescript";
-import ProductFactory from "../../domain/product/factory/product.factory";
-import ProductModel from "../../infrastructure/product/repository/sequelize/product.model";
-import ProductRepository from "../../infrastructure/product/repository/sequelize/product.repository";
-import FindProductUseCase from "./find/find.product.usecase";
-import ListProductUseCase from "./list/list.product.usecase";
-import UpdateProductUseCase from "./update/update.customer.usecase";
+import ProductFactory from "../../../domain/product/factory/product.factory";
+import ProductModel from "../../../infrastructure/product/repository/sequelize/product.model";
+import ProductRepository from "../../../infrastructure/product/repository/sequelize/product.repository";
+import ListProductUseCase from "../list/list.product.usecase";
+import UpdateProductUseCase from "../update/update.product.usecase";
 
-describe("Integration test for product use cases", () => {
+describe("Integration test for update product use case", () => {
     let sequelize: Sequelize;
 
     beforeEach(async () => {
@@ -23,27 +22,6 @@ describe("Integration test for product use cases", () => {
 
     afterEach(async () => {
         await sequelize.close();
-    });
-
-    it("should find a product", async () => {
-        const productRepository = new ProductRepository();
-        const usecase = new FindProductUseCase(productRepository);
-        const product = ProductFactory.createNewProduct("Product A", 123);
-        await productRepository.create(product);
-
-        const input = {
-            id: product.id,
-        };
-
-        const output = {
-            id: product.id,
-            name: "Product A",
-            price: 123
-        };
-
-        const result = await usecase.execute(input);
-
-        expect(result).toEqual(output);
     });
 
     it("should update a product", async () => {

@@ -1,4 +1,4 @@
-import CreateProductUseCase from "./create.customer.usecase";
+import CreateProductUseCase from "./create.product.usecase";
 import { InputCreateProductDto } from "./create.product.dto";
 
 const input : InputCreateProductDto = {
